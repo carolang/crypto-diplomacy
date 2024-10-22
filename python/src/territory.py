@@ -1,4 +1,3 @@
-from src.player import Neutral
 from src.units import Nothing, Army, Fleet
 
 
@@ -8,7 +7,6 @@ class Territory:
 
         self._neighbors = set()
         self._unit = Nothing()
-        self._commanded_by = Neutral()
 
     def name(self):
         return self._name
@@ -29,10 +27,7 @@ class Territory:
         self._unit = Nothing()
 
     def commanded_by(self):
-        return self._commanded_by
-
-    def conquer(self, new_commander):
-        self._commanded_by = new_commander
+        return self._unit.commander()
 
     def shares_type_with(self, another_territory):
         raise NotImplementedError("Subclass responsibility")
