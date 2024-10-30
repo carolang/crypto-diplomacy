@@ -1,12 +1,12 @@
 from src.player import Player
-from src.territory import Land, Sea
+from src.territory import Territory
 from src.units import Army, Fleet
 
 
 class Board:
     def __init__(self, land_names, sea_names, player_names):
-        lands = {name: Land(name) for name in land_names}
-        seas = {name: Sea(name) for name in sea_names}
+        lands = {name: Territory.new_land(name) for name in land_names}
+        seas = {name: Territory.new_sea(name) for name in sea_names}
         self._territories = lands
         self._territories.update(seas)
 

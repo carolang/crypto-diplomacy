@@ -2,8 +2,17 @@ from src.units import Nothing
 
 
 class Territory:
-    def __init__(self, name):
+    @classmethod
+    def new_land(cls, name):
+        return cls(name, is_sea=False)
+
+    @classmethod
+    def new_sea(cls, name):
+        return cls(name, is_sea=True)
+
+    def __init__(self, name, is_sea):
         self._name = name
+        self._is_sea = is_sea
 
         self._neighbors = set()
         self._unit = Nothing()
@@ -29,33 +38,8 @@ class Territory:
     def commanded_by(self):
         return self._unit.commander()
 
-    def shares_type_with(self, another_territory):
-        raise NotImplementedError("Subclass responsibility")
-
     def is_land(self):
-        raise NotImplementedError("Subclass responsibility")
+        return not self._is_sea
 
     def is_sea(self):
-        raise NotImplementedError("Subclass responsibility")
-
-
-class Land(Territory):
-    def shares_type_with(self, another_territory):
-        return another_territory.is_land()
-
-    def is_land(self):
-        return True
-
-    def is_sea(self):
-        return False
-
-
-class Sea(Territory):
-    def shares_type_with(self, another_territory):
-        return another_territory.is_sea()
-
-    def is_land(self):
-        return False
-
-    def is_sea(self):
-        return True
+        return self._is_sea
