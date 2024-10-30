@@ -53,11 +53,10 @@ class Board:
         round.apply_all_to(self)
 
     def _is_move_allowed(self, destination, origin):
-        are_neighbors = destination.name() in origin.neighbors()
+        territories_are_neighbors = destination.name() in origin.neighbors()
         destination_territory_is_compatible = self._is_territory_compatible_with_unit(destination, origin.unit())
-        destination_is_unoccupied = destination.unit().is_nothing()
 
-        return are_neighbors and destination_territory_is_compatible and destination_is_unoccupied
+        return territories_are_neighbors and destination_territory_is_compatible
 
     def _is_territory_with_name_land(self, territory_name):
         return self._territories[territory_name].is_land()
