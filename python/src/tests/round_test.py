@@ -11,7 +11,7 @@ class TestRound:
 
         board = Board([land1, land2], [], [player])
         board.make_neighbors(land1, land2)
-        board.add_unit(land1, player)
+        board.add_new_army(land1, player)
 
         round = Round()
         round.add_order(Move(land1, land2, player))
@@ -28,8 +28,8 @@ class TestRound:
         board = Board([land1, land2, land3], [], [player])
         board.make_neighbors(land1, land2)
         board.make_neighbors(land3, land2)
-        board.add_unit(land1, player)
-        board.add_unit(land3, player)
+        board.add_new_army(land1, player)
+        board.add_new_army(land3, player)
 
         round = Round()
         round.add_order(Move(land1, land2, player))

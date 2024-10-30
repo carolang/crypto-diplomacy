@@ -1,4 +1,4 @@
-from src.units import Nothing, Army, Fleet
+from src.units import Nothing
 
 
 class Territory:
@@ -20,8 +20,8 @@ class Territory:
     def unit(self):
         return self._unit
 
-    def add_unit(self, being):
-        raise NotImplementedError("Subclass responsibility")
+    def add_unit(self, unit):
+        self._unit = unit
 
     def remove_unit(self):
         self._unit = Nothing()
@@ -33,29 +33,29 @@ class Territory:
         raise NotImplementedError("Subclass responsibility")
 
     def is_land(self):
-        return False
+        raise NotImplementedError("Subclass responsibility")
 
     def is_sea(self):
-        return False
+        raise NotImplementedError("Subclass responsibility")
 
 
 class Land(Territory):
-    def add_unit(self, being):
-        self._unit = Army(being=being)
-
     def shares_type_with(self, another_territory):
         return another_territory.is_land()
 
     def is_land(self):
         return True
 
+    def is_sea(self):
+        return False
+
 
 class Sea(Territory):
-    def add_unit(self, being):
-        self._unit = Fleet(being=being)
-
     def shares_type_with(self, another_territory):
         return another_territory.is_sea()
+
+    def is_land(self):
+        return False
 
     def is_sea(self):
         return True
