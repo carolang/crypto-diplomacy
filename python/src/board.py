@@ -2,7 +2,7 @@ from src.player import Player
 from src.territory import Land, Sea
 
 
-class Map:
+class Board:
     def __init__(self, land_names, sea_names, player_names):
         lands = {name: Land(name) for name in land_names}
         seas = {name: Sea(name) for name in sea_names}
@@ -39,6 +39,9 @@ class Map:
 
     def commander_of(self, a_territory):
         return self._territories[a_territory].commanded_by()
+
+    def apply(self, round):
+        round.apply_all_to(self)
 
     def _is_move_allowed(self, destination, origin):
         are_neighbors = destination.name() in origin.neighbors()
